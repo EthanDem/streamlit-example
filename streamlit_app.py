@@ -16,6 +16,7 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
 
 st.set_page_config(page_title="My Webpage", page_icon='tada', layout='wide')
 st.header("Website Test For Scraping Links")
+st.subheader("The error message will go away once you input a proper url starting with https://"
 
 def tag_visible(element):
     if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
