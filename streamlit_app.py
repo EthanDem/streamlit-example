@@ -17,7 +17,7 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
 st.set_page_config(page_title="My Webpage", page_icon='tada', layout='wide')
 st.header("Website Test For Scraping Links")
 st.subheader("The error message will go away once you input a proper url starting with https://")
-st.write("If your website link is correct and you are still getting an error, most likely the website has blocked my scraping tool. This is a very beta version of what I want to do with this so bear with me.")
+st.write("If your website link is correct and you are still getting an error, most likely the website has blocked my scraping tool. This is a very beta version of this program, I plan on adding proxies and different user agents to avoid being blocked in the future.")
 def tag_visible(element):
     if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
         return False
