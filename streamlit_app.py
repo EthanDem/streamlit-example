@@ -34,7 +34,7 @@ def text_from_html(body):
 
 
 
-#weblink = st.text_input('Input link here. The error will go away once you input a link.')
-weblink = "https://www.ebay.com/"
+weblink = st.text_input('https://example.com')
+#weblink = "https://www.ebay.com/"
 html = urllib.request.urlopen(weblink).read()
 st.write(text_from_html(html))
