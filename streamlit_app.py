@@ -28,7 +28,7 @@ def answer_question(df, column_name, question):
             return "Sorry, I don't understand your question."
 
 file_path = st.text_input('Input EXACT file path here, and press enter.')
-#file_path = "/Users/ethandemichele/Desktop/Wow/streamlit1.csv"
+#file_path = "C:/Users/ethan/Cookies/Desktop/streamlit1.csv.csv"
 df = read_csv(file_path)
 
 @st.cache(allow_output_mutation=True)
