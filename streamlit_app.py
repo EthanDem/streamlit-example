@@ -1,41 +1,41 @@
-from bs4 import BeautifulSoup
-from bs4.element import Comment
-import urllib.request
 import streamlit as st
-
-user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
-headers={'User-Agent':user_agent,}
-hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Referer': 'https://cssspritegenerator.com',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-         'Accept-Encoding': 'none',
-         'Accept-Language': 'en-US,en;q=0.8',
-         'Connection': 'keep-alive'}
-
+import pandas as pd
 
 st.set_page_config(page_title="My Webpage", page_icon='tada', layout='wide')
-st.header("Website Test For Scraping Links")
-st.subheader("The error message will go away once you input a proper url starting with https://")
-st.write("If your website link is correct and you are still getting an error, most likely the website has blocked my scraping tool. This is a very beta version of this program, I plan on adding proxies and different user agents to avoid being blocked in the future.")
-def tag_visible(element):
-    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
-        return False
-    if isinstance(element, Comment):
-        return False
-    return True
 
+st.header("Pandas Website Test For CSV Files")
+st.subheader("You will receive the red error until you input the exact file path to which you would like to use.")
+st.write("It must be the exact file path as well as a csv, for example /Users/You/Dekstop/yourfile.csv")
+st.write("For mac, visit here on how to get an exact file path : https://support.apple.com/guide/mac-help/get-file-folder-and-disk-information-on-mac-mchlp1774/mac")
 
-def text_from_html(body):
-    soup = BeautifulSoup(body, 'html.parser')
-    texts = soup.findAll(text=True)
-    visible_texts = filter(tag_visible, texts)
-    return u" ".join(t.strip() for t in visible_texts)
+def read_csv(file_path):
+    df = pd.read_csv(file_path)
+    return df
 
+def answer_question(df, column_name, question):
+    if column_name not in df.columns:
+        return "Sorry, that column does not exist in the data."
+    else:
+        if question == "average":
+            return df[column_name].mean()
+        elif question == "minimum":
+            return df[column_name].min()
+        elif question == "maximum":
+            return df[column_name].max()
+        elif question == "standard deviation":
+            return df[column_name].std()
+        else:
+            return "Sorry, I don't understand your question."
 
+file_path = st.text_input('Input EXACT file path here, and press enter.')
+#file_path = "/Users/ethandemichele/Desktop/Wow/streamlit1.csv"
+df = read_csv(file_path)
 
+@st.cache(allow_output_mutation=True)
+def get_data():
+    return []
 
-weblink = st.text_input('https://example.com')
-#weblink = "https://www.ebay.com/"
-html = urllib.request.urlopen(weblink).read()
-st.write(text_from_html(html))
+question = st.text_input("What Function? (Type average, minimum, maximum, or standard deviation)").lower()
+column_name = st.text_input("Column Name? (Use correct punctuation)")
+answer = answer_question(df, column_name, question)
+st.write(answer)
