@@ -47,7 +47,7 @@ def get_data():
 if fileupload:
     df = read_csv(fileupload)
     question = st.text_input("What Function? (Type average, minimum, maximum, or standard deviation)").lower()
-    column_name = st.text_input("Column Name? (Use correct punctuation)").lower
+    column_name = st.text_input("Column Name? (Use correct punctuation)")
     answer = answer_question(df, column_name, question)
     st.write(answer)
 #st.write(answer)
