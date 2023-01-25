@@ -3,7 +3,7 @@ import pandas as pd
 
 st.set_page_config(page_title="My Webpage", page_icon='tada', layout='wide')
 
-st.header("SOFIA!!!!")
+st.header("Pandas Data Sorter Test")
 st.subheader("Upload a file that you would like to get information from.")
 
 
