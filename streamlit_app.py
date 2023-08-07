@@ -1,23 +1,24 @@
 import openai
 import streamlit as st
-openai.api_key = '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'
 
-messages = []
+openai.api_key = 'your-openai-api-key'
 
-system_msg = st.text_input("What type of chatbot would you like to create?\n")
+# Start a conversation
+conversation = [{"role": "system", "content": "You are a helpful assistant."}]
 
-#messages.append({"role": "system", "content":system_msg})
+st.title('Chatbot')
 
-x = st.text_input("Input question here")
-button_pressed = st.button("Send question")
+user_input = st.text_input("Input question here")
 
-if button_pressed:
-    messages.append({"role": "system", "content":system_msg})
-    message = input()
-    messages.append({"role": "user", "content": message})
+if st.button('Send question'):
+    conversation.append({"role": "user", "content": user_input})
+
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=messages)
+        messages=conversation,
+    )
+
     reply = response["choices"][0]["message"]["content"]
-    messages.append({"role": "assistant", "content": reply})
-    st.write("\n" + reply + "/n")
+    conversation.append({"role": "assistant", "content": reply})
+    
+    st.write(reply)
