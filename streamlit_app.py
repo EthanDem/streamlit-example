@@ -1,17 +1,21 @@
+import openai
 import streamlit as st
-import requests
+openai.api_key = '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'
 
-# Get parameters from the user
-param1 = st.text_input('Enter the first parameter:')
+messages = []
 
-if st.button('Scrape'):
-    # Send a request to the Flask app
-    response = requests.post('http://localhost:5000/scrape', json={'param1': param1, 'param2': param2})
+system_msg = st.text_input("What type of chatbot would you like to create?\n")
+messages.append({"role": "system", "content":system_msg})
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Display the scraped data
-        st.write(response.json()['data'])
-    else:
-        # Display the error message
-        st.error(response.json()['message'])
+x = st.text_input("Input question here")
+button_pressed = st.button("Send question")
+
+if button_pressed:
+    message = input()
+    messages.append({"role": "user", "content": message})
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages)
+    reply = response["choices"][0]["message"]["content"]
+    messages.append({"role": "assistant", "content": reply})
+    st.write("\n" + reply + "/n")
