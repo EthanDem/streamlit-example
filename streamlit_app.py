@@ -1,7 +1,8 @@
 import openai
 import streamlit as st
+import os
 
-openai.api_key = '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'
+os.environ["OPENAI_API_KEY"] ='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'
 
 st.title('Chatbot')
 
