@@ -10,6 +10,7 @@ url_to_scrape = st.text_input("Enter the URL you want to scrape:")
 email_to_share = st.text_input("Enter your email to share the Google Sheet")
 
 if st.button("Scrape"):
+    st.write("Links are being extracted. This may take a while. If you entered your email, you can close this tab and it will be shared with you on Google Sheets upon completion.")
     if url_to_scrape:
         response = requests.post(api_url, json={"url": url_to_scrape, "email": email_to_share})
         if response.status_code == 200:
