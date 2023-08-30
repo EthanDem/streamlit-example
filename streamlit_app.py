@@ -11,7 +11,7 @@ if st.button("Scrape"):
         response = requests.post(api_url, json={"url": url_to_scrape})
         if response.status_code == 200:
             st.write("Scraping completed!")
-            scraped_data = response.json()['data']
+            scraped_data = response.json()  # Adjusted this line
 
             # Display the scraped data
             for link in scraped_data:
