@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Your Flask API URL
-api_url = "link-grabber-backend.icecube1513.repl.co/scrape"
+api_url = "https://link-grabber-backend.icecube1513.repl.co/scrape"
 
 # Streamlit UI
 url_to_scrape = st.text_input("Enter the URL you want to scrape:")
