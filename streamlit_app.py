@@ -2,8 +2,9 @@ import streamlit as st
 import requests
 
 api_url = "https://link-grabber-backend.icecube1513.repl.co/scrape"
+st.header("URL Grabber")
+url_to_scrape = st.text_input("Enter the URL you want to fetch all webpages from")
 
-url_to_scrape = st.text_input("Enter the URL you want to scrape:")
 if st.button("Scrape"):
     st.write("Scraping in progress. This may take a while.")
     if url_to_scrape:
