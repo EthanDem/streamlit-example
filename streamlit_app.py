@@ -2,7 +2,6 @@ import streamlit as st
 import requests
 import pandas as pd
 
-
 replit_url = "https://selenium-backend.icecube1513.repl.co/scrape"
 
 url_to_scrape = st.text_input("Enter the URL you want to scrape:")
@@ -14,8 +13,8 @@ if st.button("Scrape"):
             scraped_data = response.json()['data']
 
             df = pd.DataFrame(scraped_data, columns=['Scraped Links'])
-         
-            st.table(df)
+
+            st.write(df, index=False)
         else:
             st.write(f"An error occurred: {response.content}")
     else:
