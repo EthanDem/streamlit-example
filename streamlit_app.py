@@ -1,10 +1,10 @@
 import streamlit as st
 import requests
 
-# Your Replit URL
+
 replit_url = "https://selenium-backend.icecube1513.repl.co/scrape"
 
-# Streamlit UI
+
 url_to_scrape = st.text_input("Enter the URL you want to scrape:")
 if st.button("Scrape"):
     if url_to_scrape:
