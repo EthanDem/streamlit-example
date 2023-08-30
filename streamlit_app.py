@@ -1,28 +1,18 @@
-import openai
 import streamlit as st
-import os
+import requests
 
-os.environ["OPENAI_API_KEY"] ='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'
+# Your Replit URL
+replit_url = "https://selenium-backend.icecube1513.repl.co/scrape"
 
-st.title('Chatbot')
-
-# Let the user set the behavior of the assistant
-system_msg = st.text_input("What type of assistant would you like to create?")
-
-user_input = st.text_input("Input your question here")
-
-if st.button('Send question'):
-    # Start the conversation with the user defined system message
-    conversation = [{"role": "system", "content": system_msg}]
-
-    conversation.append({"role": "user", "content": user_input})
-
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=conversation,
-    )
-
-    reply = response["choices"][0]["message"]["content"]
-    conversation.append({"role": "assistant", "content": reply})
-
-    st.write(reply)
+# Streamlit UI
+url_to_scrape = st.text_input("Enter the URL you want to scrape:")
+if st.button("Scrape"):
+    if url_to_scrape:
+        response = requests.post(replit_url, json={"url": url_to_scrape})
+        if response.status_code == 200:
+            st.write("Scraping completed!")
+            st.write(response.json())
+        else:
+            st.write(f"An error occurred: {response.content}")
+    else:
+        st.write("Please enter a URL.")
